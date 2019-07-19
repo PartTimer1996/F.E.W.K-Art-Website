@@ -1,0 +1,189 @@
+html{
+    margin: 0;
+    padding: 0;
+}
+
+hr{
+    color: black;
+}
+
+body {
+    font-family: TimesNewRoman, "Times New Roman";
+    font-size: 1rem;
+    margin: 0px;
+
+}
+
+h1 {
+    margin: 0 auto 0 auto;
+    font-size: 3rem;
+    font-family: 'Merriweather', Helvetica, Arial, sans-serif;
+    color: #000000;
+}
+
+h2 {
+    margin-top: 15px;
+    font-size: 2rem;
+    font-family: 'Open Sans', sans-serif;
+    color: #000000;
+    font-weight: normal;
+    text-align: center;
+}
+
+h3 {
+    color: #000000;
+    font-size: 1.3rem;
+    font-family: 'Open Sans', sans-serif;
+}
+
+a {
+    font-family: 'Open Sans', sans-seriff;
+    margin: 10px 20px;
+    text-decoration: none;
+
+}
+
+.display{
+    max-width: 60%;
+    height: auto;
+    width: auto;
+}
+
+.carousel{
+    position: relative;
+    bottom: 0px;
+}
+
+.jumbotron {
+    position: relative;
+    margin: 0 0 0 50px;
+    background-color: #FFFFFF;
+    padding: 50px 0 0 0;
+}
+
+.top-container {
+    position: relative;
+    text-align: center;
+    background-color: #EAF6F6;
+    line-height: 2;
+    width: 100%;
+}
+
+.middle-container {
+    margin: 30px auto 30px auto;
+}
+
+
+.bottom-container {
+    position: relative;
+    top: 50px;
+    bottom: 10px;
+    background-color: #343a40;
+    text-align: center;
+    color: #EAF6F6;
+    padding: 20px 20px;
+    font-family: 'Merriweather',Helvetica,Arial,sans-serif;
+
+}
+
+.contact-me {
+    text-align: center;
+}
+
+.footer-link{
+    color: #EAF6F6;
+    position: relative;
+    bottom: 15px;
+
+}
+
+.credit{
+    font-size: 10px;
+}
+
+
+/*BOOTSTRAP MODIFICATION
+ */
+
+.merch-button1{
+    position: relative;
+    margin-right: 150px;
+}
+
+.merch-button2{
+    position: relative;
+    margin-right: 100px;
+}
+
+.navbar-brand {
+    font-size: 3rem;
+    font-family: 'Merriweather', Helvetica, Arial, sans-serif;
+}
+
+.navbar-collapse {
+    color: #11999E;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.nav-toggler {
+    width: 2rem;
+    height: 5px;
+    background-color: #000000;
+    margin: 6px;
+    padding: 0px;
+}
+
+.nav-item{
+    font-size: 1rem;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.carousel slide {
+    margin: 0 auto 0 auto;
+}
+
+.carousel-inner .active{
+    margin: 0 auto 0 auto;
+}
+
+.display, .d-block, .w-100{
+    position: relative;
+    margin: 0 auto 0 auto;
+    padding: 0;
+    width: 100%
+
+}
+
+.carousel-control-next-icon, .carousel-control-prev-icon{
+    color: #000000;
+    background-color: black;
+}
+
+.carousel-indicators {
+    position: relative;
+    top: 40px;
+    margin: 0 auto 0 auto;
+    width: 30%;
+}
+
+.indicator{
+    background-color: black;
+}
+
+.carousel-header{
+    position:relative;
+    margin: 25px auto 0 auto;
+    text-align: center;
+}
+
+.brand{
+    height: 80px;
+    width: 100px;
+}
+
+.carousel-control-prev{
+    margin: auto 0 auto 0;
+}
+.carousel-control-next{
+    margin: auto 0 auto 0;
+}
