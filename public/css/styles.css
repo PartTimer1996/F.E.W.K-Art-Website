@@ -202,7 +202,7 @@ a {
      width: 50%;
  }
 
-.form-control{
+.login{
     margin-top: 50px;
 
 }
@@ -216,5 +216,100 @@ a {
 }
 
 .gallery-img{
-    height: 225px;
+    height: 450px;
+}
+
+@media screen and (max-width: 1000px) {
+    .gallery-img {
+        height: 325px;
+
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    .gallery-img {
+        height: 450px;
+
+    }
+}
+
+.coming-soon{
+    position: relative;
+    text-align: center;
+    margin: 0 auto 250px 100px;
+    padding: 0;
+    width: 75%
+}
+
+.store-header{
+    position: relative;
+    margin: 50px 0 50px 50px;
+    padding: 0;
+}
+
+.social-media{
+padding-right: 100px
+}
+
+.container{
+    position: relative;
+    margin: 50px auto 50px 50px;
+    max-width: 80%
+}
+
+
+@media screen and (min-width: 1200px) {
+    .img-fluid {
+        height: 150px;
+        width: 30%;
+
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .social-media {
+        padding-right: 0;
+        margin: 0;
+    }
+
+}
+
+@media screen and (max-width: 700px) {
+    .img-fluid {
+        height: 60px;
+        width: 90%;
+    }
+
+}
+
+@media screen and (max-width: 700px) {
+    .social-media {
+        padding-right: 20px;
+    }
+
+}
+
+
+
+.social{
+    text-align: left;
+    margin: 0 0 30px 0;
+}
+
+.social-2{
+    margin-left: 50px;
+}
+
+.mb-6{
+    margin-bottom: 15px;
+}
+
+.btn-google{
+    width: 80%
+}
+
+.contact-me-container{
+    position: relative;
+    margin: 0 auto 50px 50px;
+    max-width: 80%
 }
