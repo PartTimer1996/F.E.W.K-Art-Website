@@ -187,3 +187,34 @@ a {
 .carousel-control-next{
     margin: auto 0 auto 0;
 }
+
+.form-signin{
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: 150px auto  auto;
+}
+
+.btn-block {
+     position: relative;
+     text-align: center;
+     margin: 25px auto 0 auto;
+     width: 50%;
+ }
+
+.form-control{
+    margin-top: 50px;
+
+}
+
+.mb-3{
+    margin-top: 25px;
+}
+
+.mr-sm-2{
+    margin:0;
+}
+
+.gallery-img{
+    height: 225px;
+}

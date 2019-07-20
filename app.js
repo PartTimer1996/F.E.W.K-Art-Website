@@ -43,7 +43,7 @@ app.get('/', function (req, res)
              }
          }
      });*/
-})
+});
 
 app.get('/Gallery', function (req, res)
 {
@@ -58,6 +58,66 @@ app.get('/Gallery', function (req, res)
              }
          }
      });*/
-})
+});
+
+app.get('/Store', function (req, res)
+{
+
+    res.render("Store")
+    /* Article.find({}, function (err, foundArticle) {
+         if(!err){
+             if(foundArticle){
+                 res.send(foundArticle)
+             }else{
+                 res.send('No Article Found!')
+             }
+         }
+     });*/
+});
+
+app.get('/Contact_Me', function (req, res)
+{
+
+    res.render("Contact_Me")
+    /* Article.find({}, function (err, foundArticle) {
+         if(!err){
+             if(foundArticle){
+                 res.send(foundArticle)
+             }else{
+                 res.send('No Article Found!')
+             }
+         }
+     });*/
+});
+
+app.get('/Login', function (req, res)
+{
+
+    res.render("Login")
+    /* Article.find({}, function (err, foundArticle) {
+         if(!err){
+             if(foundArticle){
+                 res.send(foundArticle)
+             }else{
+                 res.send('No Article Found!')
+             }
+         }
+     });*/
+});
+
+app.get('/Register', function (req, res)
+{
+
+    res.render("Register")
+    /* Article.find({}, function (err, foundArticle) {
+         if(!err){
+             if(foundArticle){
+                 res.send(foundArticle)
+             }else{
+                 res.send('No Article Found!')
+             }
+         }
+     });*/
+});
 
 app.listen(port, () => console.log(`REST app listening on port ${port}!`))
