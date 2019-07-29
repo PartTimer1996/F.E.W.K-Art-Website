@@ -11,21 +11,22 @@ body {
     font-family: TimesNewRoman, "Times New Roman";
     font-size: 1rem;
     margin: 0px;
+    background-color: #363333;
 
 }
 
 h1 {
     margin: 0 auto 0 auto;
     font-size: 3rem;
-    font-family: 'Merriweather', Helvetica, Arial, sans-serif;
-    color: #000000;
+    font-family: 'Pacifico', cursive;
+    color: #FFFFFF;
 }
 
 h2 {
     margin-top: 15px;
-    font-size: 2rem;
-    font-family: 'Open Sans', sans-serif;
-    color: #000000;
+    font-size: 3rem;
+    font-family: 'Dancing Script', cursive;
+    color: #FFFFFF;
     font-weight: normal;
     text-align: center;
 }
@@ -33,7 +34,7 @@ h2 {
 h3 {
     color: #000000;
     font-size: 1.3rem;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Dancing Script', cursive;
 }
 
 a {
@@ -41,6 +42,10 @@ a {
     margin: 10px 20px;
     text-decoration: none;
 
+}
+
+.homepage{
+    background-image: url("/public/images/Art/Art/1. PinkB, BlackC, WhiteOL.jpg");
 }
 
 .display{
@@ -56,9 +61,10 @@ a {
 
 .jumbotron {
     position: relative;
-    margin: 0 0 0 50px;
-    background-color: #FFFFFF;
-    padding: 50px 0 0 0;
+    margin: 0 0 0 35px;
+    background-color: #363333;
+    padding: 25px 0 0 0;
+    color: #FFFFFF;
 }
 
 .top-container {
@@ -78,7 +84,7 @@ a {
     position: relative;
     top: 50px;
     bottom: 10px;
-    background-color: #343a40;
+    background-color: #272121;
     text-align: center;
     color: #EAF6F6;
     padding: 20px 20px;
@@ -115,6 +121,15 @@ a {
     margin-right: 100px;
 }
 
+.navbar{
+    background-color: #272121;
+    color: #FFFFFF;
+}
+
+.nav-link{
+    color: #FFFFFF;
+}
+
 .navbar-brand {
     font-size: 3rem;
     font-family: 'Merriweather', Helvetica, Arial, sans-serif;
@@ -146,12 +161,26 @@ a {
     margin: 0 auto 0 auto;
 }
 
-.display, .d-block, .w-100{
-    position: relative;
-    margin: 0 auto 0 auto;
-    padding: 0;
-    width: 100%
+@media screen and (max-width: 1200px) {
+    .display, .d-block, .w-100{
+        position: relative;
+        margin: 0 auto 0 auto;
+        padding: 0;
+        width: auto;
+        max-width: 90%;
 
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .display, .d-block, .w-100{
+        position: relative;
+        margin: 0 auto 0 auto;
+        padding: 0;
+        width: auto;
+        max-width: 60%;
+
+    }
 }
 
 .carousel-control-next-icon, .carousel-control-prev-icon{
@@ -176,16 +205,20 @@ a {
     text-align: center;
 }
 
-.brand{
-    height: 80px;
-    width: 100px;
-}
 
 .carousel-control-prev{
-    margin: auto 0 auto 0;
+    margin: 0;
+    width: 7%;
 }
 .carousel-control-next{
-    margin: auto 0 auto 0;
+    margin: 0;
+    width: 7%;
+}
+
+.form-row
+{
+color: #FFFFFF;
+
 }
 
 .form-signin{
@@ -216,21 +249,29 @@ a {
 }
 
 .gallery-img{
-    height: 450px;
+    height: 550px;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1200px) {
     .gallery-img {
         height: 325px;
 
     }
 }
 
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: 1200px) {
     .gallery-img {
         height: 450px;
 
     }
+}
+
+#gal-top{
+    margin: 50px auto 15px auto;
+}
+
+.py-5{
+    padding-top: 1.5rem;
 }
 
 .coming-soon{
@@ -253,7 +294,7 @@ padding-right: 100px
 
 .container{
     position: relative;
-    margin: 50px auto 50px 50px;
+    margin: 50px auto 50px auto;
     max-width: 80%
 }
 
@@ -289,8 +330,6 @@ padding-right: 100px
 
 }
 
-
-
 .social{
     text-align: left;
     margin: 0 0 30px 0;
@@ -298,11 +337,21 @@ padding-right: 100px
 
 .social-2{
     margin-left: 50px;
+    color: #FFFFFF;
 }
 
 .mb-6{
     margin-bottom: 15px;
 }
+
+.brand{
+    font-family: 'Pacifico', cursive;
+    color: white;
+    font-size: 32px;
+    margin: 0;
+}
+
+
 
 .btn-google{
     width: 80%
@@ -313,3 +362,30 @@ padding-right: 100px
     margin: 0 auto 50px 50px;
     max-width: 80%
 }
+
+
+/* The overlay effect - lays on top of the container and over the image */
+.overlay {
+    position: absolute;
+    bottom: 0;
+    background: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 0.5); /* Black see-through */
+    color: #f1f1f1;
+    width: 100%;
+    transition: .5s ease;
+    opacity:0;
+    color: white;
+    font-size: 20px;
+    padding: 20px;
+    text-align: center;
+}
+
+/* When you mouse over the container, fade in the overlay title */
+.col-md-4:hover .overlay {
+    opacity: 1;
+}
+
+.carousel-item .overlay {
+    opacity: 1;
+}
+
