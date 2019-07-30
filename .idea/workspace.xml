@@ -7,7 +7,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a836a2fc-4104-4b78-9bcd-fe52e56c8554" name="Default Changelist" comment="K">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -85,6 +85,7 @@
       <workItem from="1564334152264" duration="16490000" />
       <workItem from="1564434419081" duration="1857000" />
       <workItem from="1564507755705" duration="8657000" />
+      <workItem from="1564524279458" duration="292000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;Commit missing files&quot;">
       <created>1562707705846</created>

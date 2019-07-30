@@ -16,7 +16,6 @@ const findOrCreate = require("mongoose-findorcreate");
 
 
 const app = express();
-const port = process.env.PORT || 3000;
 
 app.set('view engine', 'ejs');
 
@@ -205,6 +204,8 @@ app.post('/login', function(req, res){
 
 
 
-app.listen(port, function(){
+const port = process.env.PORT || 5000;
+
+app.listen(process.env.PORT || 5000, function(){
     console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
 });
