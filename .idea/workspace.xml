@@ -6,8 +6,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a836a2fc-4104-4b78-9bcd-fe52e56c8554" name="Default Changelist" comment="K">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/Store_Images/il_794xN.1965291185_20ie.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/Store_Images/il_794xN.1987699403_3lxb.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/Register.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/Register.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/Store.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/Store.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/home.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/home.ejs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,6 +26,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CSS File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -47,11 +55,11 @@
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/public/images/Other" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/views" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/images/Other" />
     </key>
   </component>
   <component name="RunDashboard">

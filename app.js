@@ -1,7 +1,5 @@
-//jshint esversion:6
-
+//Require all the necessary packages
 require('dotenv').config();
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const ejs = require('ejs');
@@ -13,29 +11,32 @@ const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const findOrCreate = require("mongoose-findorcreate");
+const flash = require('connect-flash');
+const expressValidator = require('express-validator');
 
 
 const app = express();
-
 app.set('view engine', 'ejs');
-
 app.use(bodyParser.urlencoded({
     extended: true
 }));
-
 app.use(session({
     secret: "my lil secret",
     resave: false,
     saveUninitialized: false
 }));
-
 app.use(passport.initialize());
 app.use(passport.session());
-
-
 app.use(express.static("public"));
+app.use(flash());
+app.use(expressValidator())
 
 
+app.use(function(req, res, next){
+    res.locals.login = req.isAuthenticated();
+    next();
+    });
+    
 const uristring =
     process.env.MONGOLAB_URI ||
     process.env.MONGOHQ_URL ||
@@ -48,21 +49,85 @@ mongoose.connect(uristring, {useNewUrlParser: true}, function (err, res) {
         console.log ('Succeeded connected to: ' + uristring);
     }
 });
+
 mongoose.set("useCreateIndex", true);
+
+
+const itemSchema = new mongoose.Schema (
+    {
+        imagePath: {type: String, required:true},
+        title: {type: String, required:true},
+        description: {type: String, required:true},
+        price: {type: Number, required:true}
+    }
+);
+
+const Item = mongoose.model('Item', itemSchema);
+
+// Seeding the new database collection
+// const items = [
+//     new Item({
+//    imagePath: "https://i.etsystatic.com/20487395/r/il/bc1006/1987696279/il_794xN.1987696279_qrv1.jpg",
+//     title: "Trump Toad!",
+//     description: "Image of Trump as a toad man, just for you!!",
+//     price: "1000"
+// }),
+//     new Item({
+//         imagePath: "https://i.etsystatic.com/20487395/r/il/9c4490/1916130094/il_794xN.1916130094_qbx1.jpg",
+//         title: "D O N A L D",
+//         description: "Aye it's Donald the Duck",
+//         price: "15"
+//     }),
+//     new Item({
+//         imagePath: "https://www.etsy.com/uk/listing/715733747/criangle?ref=shop_home_active_5",
+//         title: "Criangle",
+//         description: "You too can have this Criangle imagery",
+//         price: "7500"
+//     }),
+//     new Item({
+//         imagePath: "https://www.etsy.com/uk/listing/715372063/g-o-o-f-y?ref=shop_home_active_9",
+//         title: "GOOFY",
+//         description: "Your very one Pooh bear!",
+//         price: "10"
+//     }),
+// ];
+//
+//
+// for(let i = 0; i < items.length; i ++)
+// {
+//     items[i].save();
+// }
+
+
 
 //Creation of Schema and Model to add to this database
 const userSchema = new mongoose.Schema (
-    {   username: String,
+    {   forename: String,
+        surname: String,
+        username: String,
         password: String,
-        googleId: String,
+        googleId:  String,
         secret: String
     }
 );
+
 
 userSchema.plugin(passportLocalMongoose);
 userSchema.plugin(findOrCreate);
 
 const User = mongoose.model('User', userSchema);
+
+//Seeding the user collection
+//  const newUser = new User({
+//      forename: "Ryan",
+//      surname: "Duffy",
+//      username: "rduffy16@qub.ac.uk",
+//     password: "Edenhazard69"
+
+//  });
+
+//  newUser.save();
+
 
 passport.use(User.createStrategy());
 
@@ -79,7 +144,7 @@ passport.deserializeUser(function(id, done){
 passport.use(new GoogleStrategy({
         clientID: process.env.CLIENT_ID,
         clientSecret: process.env.CLIENT_SECRET,
-        callbackURL: "http://localhost:3000/auth/google/FEWK-Art",
+        callbackURL: "http://localhost:5000/auth/google/FEWK-Art",
         userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
     },
     function(accessToken, refreshToken, profile, cb) {
@@ -88,6 +153,20 @@ passport.use(new GoogleStrategy({
         });
     }
 ));
+
+function isLoggedIn(req,res,next) {
+     if (req.isAuthenticated()){
+         return next();
+     }
+     res.redirect('/');
+}
+
+function isLoggedOut(req,res,next) {
+    if (!req.isAuthenticated()){
+        return next();
+    }
+    res.redirect('/');
+}
 
 app.get("/auth/google",
     passport.authenticate("google", {scope : ['profile']}, function(){
@@ -125,7 +204,21 @@ app.get('/Gallery', function (req, res)
 
 app.get('/Store', function (req, res)
 {
-    res.render("Store")
+    Item.find({}, function(err, foundItems){
+        if (!err) {
+            if (foundItems.length === 0) {
+                res.render("Store");
+            } else {
+                res.render("Store", {
+                    onlineItems: foundItems //itemChunks
+                });
+            }
+        }
+        else{
+            console.log(err);
+            res.redirect("/");
+        }
+    })
 });
 
 app.get('/Contact_Me', function (req, res)
@@ -133,31 +226,71 @@ app.get('/Contact_Me', function (req, res)
     res.render("Contact_Me")
 });
 
-app.get('/Login', function (req, res)
+app.get('/Login',isLoggedOut, function (req, res)
 {
-    if(req.isAuthenticated()){
-        res.redirect("/logout")
-    }else {
         res.render('Login');
-    }
-
 });
+app.post('/login', passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/login', // see text
+    failureFlash: true // optional, see text as well
+  })
+);
 
-app.get('/Register', function (req, res)
-{
-    if(req.isAuthenticated()){
-        res.redirect("/")
-
-    }else {
-        res.render('Register');
-    }
-
-});
-
-app.get('/logout', function (req, res) {
+app.get('/logout',isLoggedIn, function (req, res) {
     req.logout();
     res.redirect("/");
 })
+
+app.get('/Register',isLoggedOut, function (req, res)
+{ 
+        res.render('Register', {title: 'Form Validation', success: req.session.success, errors: req.session.errors, duplicate: req.session.duplicate});
+        req.session.errors = null;
+    
+});
+app.post('/Register', function(req,res){
+            req.check('forename', 'Provide a valid first name').isLength({min:2});
+            req.check('surname', 'Provide a valid last name').isLength({min:2});
+            req.check('username', 'Provide a valid email address').isEmail();
+            req.check('password', 'Password must be longer than 6 characters').isLength({min:6});
+            req.check('password', 'Password must match Confirm Password').equals(req.body.passwordConfirm);
+            var errors = req.validationErrors();
+
+            User.findOne({username: req.body.username}, function(err, foundUsers){
+          
+                if (!err) {
+                if (foundUsers) {
+                req.session.duplicate = true;
+                errors = false;
+                res.redirect('/Register');
+                
+             }
+             else{
+                 req.session.duplicate = false;
+                 if (errors) {
+                    req.session.errors = errors;
+                    req.session.success = false;
+                    res.redirect('/Register')
+                  }else if (!errors){
+                    req.session.success = true;
+                    errors = {};
+                User.register({forename: req.body.forename, surname: req.body.surname, username: req.body.username}, req.body.password, function(err, user) {
+                        passport.authenticate("local")(req,res,function(){
+                            res.redirect("/")
+                  })
+            })
+            }
+             } 
+           }
+        })
+});
+
+app.get("/userProfile", isLoggedIn,function(req,res){
+    
+        res.render('userProfile')
+    
+})
+
 
 app.get("/submit", function(req,res){
     if(req.isAuthenticated()){
@@ -165,42 +298,9 @@ app.get("/submit", function(req,res){
     }else {
         res.redirect('/login')
     }
-});
+})
 
-app.post('/Register', function(req,res){
 
-    User.register({username: req.body.username}, req.body.password, function(err, user) {
-        if (err)
-        {
-            console.log(err);
-            res.redirect("/register");
-        }else{
-            passport.authenticate("local")(req,res,function(){
-                res.redirect("/")
-            })
-        }
-    });
-});
-
-app.post('/login', function(req, res){
-
-    const user = new User({
-        username: req.body.username,
-        password: req.body.password
-
-    });
-
-    req.login(user, function(err){
-        if(err){
-            console.log(err);
-            res.redirect("/login");
-        } else {
-            passport.authenticate("local")(req, res, function(){
-                res.redirect("/");
-            });
-        }
-    });
-});
 
 
 

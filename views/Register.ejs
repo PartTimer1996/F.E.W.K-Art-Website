@@ -11,30 +11,60 @@
                 <div class="card-body">
 
                     <!-- Makes POST request to /register route -->
-                    <form action="/Register" method="POST"><!-- action="/register" method="POST" -->
+                    <form class="needs-validation" novalidate action="/Register" method="POST"><!-- action="/register" method="POST" -->
                         <div class="form-group">
-                            <label for="username">Email</label>
-                            <input type="text" class="form-control" name="username">
+                            <div class="form-row">
+                                <div class="col">
+                                    <label style = "color: black" for="forename">First Name</label>
+                                    <input type="text" class="form-control"  name = "forename">
+                                </div>
+                                <div class="col">
+                                    <label style = "color: black" for="surname">Surname</label>
+                                    <input type="text" class="form-control"  name ="surname">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="inputEmail" name = "username">
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
                             <input type="password" class="form-control" name="password">
                         </div>
-<!--                        <div class="form-group">-->
-<!--                            <label for="password">Confirm Password</label>-->
-<!--                            <input type="password" class="form-control" name="password">-->
-<!--                        </div>-->
+                       <div class="form-group">
+                           <label for="password">Confirm Password</label>
+                            <input type="password" class="form-control" name="passwordConfirm">
+                       </div>
                             <button type="submit" class="btn btn-dark" >Register</button>
                     </form>
-
+                    <!-- need to come back to, validate the register process-->
+                <% if (success) {%>
+                   <%} else { %>
+                    <%} if (errors) { %>
+                        <P></P>
+                    <div class = "alert alert-danger">
+                    <p>Please correct the below Errors to register: </p> 
+                    <ul>
+                        <% errors.forEach(function(error){ %>
+                            <li><%=error.msg %> </li>
+                        <% }) %>
+                        <p></p>
+                    </ul>
+                    </div>
+                    <%}%>
+                    <% if (duplicate) {%>
+                        <p></p>
+                        <div class = "alert alert-danger">
+                            <p>That email is already in use</p>
+                        </div>
+                        <%}%>
+                   
                 </div>
             </div>
         </div>
-
-
 </div>
     </div>
-
     <div class="container mt-5">
         <div class="col-sm-4">
             <div class="card social-block">

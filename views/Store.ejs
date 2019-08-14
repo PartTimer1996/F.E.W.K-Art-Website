@@ -1,10 +1,42 @@
 <%- include("partials/header")-%>
 
+
+
+
 <body>
-<h1 class = "store-header">Stay Tuned to F.E.W.K for Merchandise!</h1>
-<div class = "img-container">
-<img class ="coming-soon" src ="images/Other/coming-soon.jpg" alt ="Something went wrong">
-</div>
+<section class="jumbotron text-center">
+    <div class="container" id="gal-top">
+        <h2>Welcome to the Store</h2>
+        <hr>
+    </div>
+</section>
+
+<div class="album py-5 bg-light">
+    <div class="container">
+        <div class="row">
+        <% onlineItems.forEach(function(item){ %>
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        <img class = "gallery-img" src="<%= item.imagePath%>"/>
+                        <div class="btn-group">
+                            <div class="overlay">
+                                <p style = "text-align: center"><%= item.description%></p>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h3 style = "text-align: center"><%= item.title%></h3>
+                            <p style = "text-align: center"> $<%= item.price%></p>
+                            <button type = "button" class = "btn btn-dark">Add to Basket</button>
+                            <button type = "button" class = "btn btn-dark">View</button>
+                        </div>
+                    </div>
+                </div>
+            <% });%>
+            </div>
+    </div>
+
+
+
 </body>
 
 
