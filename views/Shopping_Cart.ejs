@@ -1,0 +1,95 @@
+<%- include("partials/header")-%>
+
+<!-- <% if (products) {%>
+    <div class = "row">
+        <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3"></div>
+            <ul class = "list-group">
+                <% products.forEach(function(product){ %>
+                <li class ="list-group-item">
+                    <span class = "badge"><%=product.qty %></span>
+                    <strong><%=product.product.title %></strong>
+                    <span class="label label-success"><%=product.price%></span>
+                    <div class="btn-group">
+                        <button class="btn btn-primary btn-xs dropdown-toggle" type="button">Action <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                            <li>Remove item</li>
+                            <li>Remove all</li>
+                        </ul>
+                    </div>
+                    
+                </li>
+          <% }) %>  
+            </ul>
+        </div>
+    </div>
+        <div class = "row">
+                <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3"></div>
+                <h2> Total Price: <%= totalPrice %></h2>
+        </div>
+        </div>
+        
+        <div class = "row">
+                <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3"></div>
+                <button class="btn btn-success" type="button">Checkout</button>
+        </div>
+        </div>
+    </div>
+<% } else{ %>
+    <h2>No items in cart</h2>
+</div>
+<% }%> -->
+<% if (products) {%>
+<div style = "background-color:grey"class="container checkout">
+        <table id="cart" class="table table-hover table-condensed">
+            <thead>
+                <tr>
+                                <th style="width:50%">Product</th>
+                                <th style="width:10%">Price ($)</th>
+                                <th style="width:8%">Quantity</th>
+                                <th style="width:22%" class="text-center">Subtotal</th>
+                                <th style="width:10%"></th>
+                            </tr>
+                        </thead>
+                        <% products.forEach(function(product){ %>
+                        <tbody>
+                            <tr>
+                                <td data-th="Product">
+                                    <div class="row">
+                                        <div class="col-sm-2 hidden-xs"><img src="<%=product.product.imagePath %>" alt="..." class="img-responsive" style="width:500%"/></div>
+                                        <div class="col-sm-10">
+                                            <h4 class="nomargin"><%=product.product.title %></h4>
+                                            <p><%=product.product.description %></p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td data-th="Price"><%= product.price %></td>
+                                <td data-th="Quantity">
+                                    <input type="number" class="form-control text-center" value="<%=product.qty %>">
+                                </td>
+                                <td data-th="Subtotal" class="text-center">Needs added</td>
+                                <td class="actions" data-th="">
+                                    <button class="btn btn-info btn-sm"><i class="fa fa-refresh">Add</i></button>
+                                    <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o">Remove</i></button>								
+                                </td>
+                            </tr>
+                        </tbody>
+                        <% }) %>  
+                        <tfoot>
+                            <tr class="visible-xs">
+                                <td class="text-center"><strong>Total $<%= totalPrice %></strong></td>
+                            </tr>
+                            <tr>
+                                <td><a href="#" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
+                                <td colspan="2" class="hidden-xs"></td>
+                                <td class="hidden-xs text-center"><strong></strong></td>
+                                <td><a href="#" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+    </div>
+    <% } else{ %>
+        <h2>No items in cart</h2>
+    </div>
+    <% }%> -->
+
+<%- include("partials/footer")-%>

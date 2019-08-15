@@ -26,7 +26,7 @@
                         <div class="card-body">
                             <h3 style = "text-align: center"><%= item.title%></h3>
                             <p style = "text-align: center"> $<%= item.price%></p>
-                            <button type = "button" class = "btn btn-dark">Add to Basket</button>
+                            <a href = "/add-to-cart/<%= item._id %>"> <button type = "button" class = "btn btn-dark">Add to Basket</button></a> 
                             <button type = "button" class = "btn btn-dark">View</button>
                         </div>
                     </div>

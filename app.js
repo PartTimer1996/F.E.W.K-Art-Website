@@ -1,4 +1,4 @@
-//Require all the necessary packages
+//Import all the necessary packages
 require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -13,7 +13,7 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const findOrCreate = require("mongoose-findorcreate");
 const flash = require('connect-flash');
 const expressValidator = require('express-validator');
-
+const MongoStore = require('connect-mongo')(session);
 
 const app = express();
 app.set('view engine', 'ejs');
@@ -23,17 +23,19 @@ app.use(bodyParser.urlencoded({
 app.use(session({
     secret: "my lil secret",
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    store: new MongoStore({mongooseConnection: mongoose.connection}),
+    cookie: {maxAge: 100 * 60 * 1000}
 }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static("public"));
 app.use(flash());
-app.use(expressValidator())
-
+app.use(expressValidator());
 
 app.use(function(req, res, next){
     res.locals.login = req.isAuthenticated();
+    res.locals.session = req.session;
     next();
     });
     
@@ -300,8 +302,52 @@ app.get("/submit", function(req,res){
     }
 })
 
+function Cart(oldCart) { 
+    this.products = oldCart.products || {};
+    this.totalQty = oldCart.totalQty || 0;
+    this.totalCost = oldCart.totalCost || 0;
 
+    this.add = function(product, id){
+        let storedProduct = this.products[id];
+        if(!storedProduct) {
+            storedProduct = this.products[id] = {product: product, qty: 0, price: 0}
+        }
+        storedProduct.qty++;
+        storedProduct.price = storedProduct.product.price * storedProduct.qty;
+        this.totalQty++;
+        this.totalCost += storedProduct.product.price;
+}
+    this.generateArray = function(){
+        const arr = [];
+        for (var id in this.products){ 
+            arr.push(this.products[id]);
+        }
+        return arr;
+    }
+};
 
+app.get("/add-to-cart/:id", function (req,res, next){
+const productId = req.params.id; 
+const cart = new Cart(req.session.cart ? req.session.cart : {});
+
+Item.findById(productId, function(err, item){
+    if (err){
+        return res.redirect('/Store');
+    }
+    cart.add(item, item.id);
+    req.session.cart = cart;
+    console.log(req.session.cart);
+    res.redirect('/Store')
+});
+});
+
+app.get('/Shopping_Cart', function(req, res ,next){
+if(!req.session.cart){
+    return res.render('Shopping_Cart', {products: null});
+}
+let cart = new Cart(req.session.cart);
+res.render('Shopping_Cart', {products: cart.generateArray(), totalPrice: cart.totalCost})
+});
 
 
 const port = process.env.PORT || 5000;

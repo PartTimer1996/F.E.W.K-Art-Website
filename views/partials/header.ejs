@@ -33,19 +33,24 @@
             <li class="nav-item">
             <a class="nav-link" href="Contact_Me">Contact Me</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="Shopping_Cart">Shopping Cart
+                    <span class = "badge"> <%= //session.cart.totalQty %></span>
+                </a>
+            </li>
             <% if (!login) {%>
             <li class="nav-item">
                 <a class="nav-link" href="Login">Login</a>
             </li>
             <% } %>
             <% if (login) {%>
-                <li class="nav-item">
-                    <a class="nav-link" href="userProfile">Profile</a>
-                </li>
-                <li class="nav-item">
-                        <a class="nav-link" href="Logout">Logout</a>
-                    </li>
-                <% } %>
+            <li class="nav-item">
+                 <a class="nav-link" href="userProfile">Profile</a>
+            </li>
+            <li class="nav-item">
+                  <a class="nav-link" href="Logout">Logout</a>
+             </li>
+             <% } %>
         </ul>
 
             <ul class="navbar-nav ml-auto">
