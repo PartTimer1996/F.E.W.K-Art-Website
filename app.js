@@ -1,3 +1,7 @@
+const months = [01,02,03,04,05,06,07,08,09,10,11,12];
+const years = [2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029];
+
+
 //Import all the necessary packages
 require('dotenv').config();
 const express = require('express');
@@ -337,7 +341,7 @@ Item.findById(productId, function(err, item){
     cart.add(item, item.id);
     req.session.cart = cart;
     console.log(req.session.cart);
-    res.redirect('/Store')
+     res.redirect('/Store')
 });
 });
 
@@ -347,6 +351,14 @@ if(!req.session.cart){
 }
 let cart = new Cart(req.session.cart);
 res.render('Shopping_Cart', {products: cart.generateArray(), totalPrice: cart.totalCost})
+});
+
+app.get('/Checkout', function(req, res, next){ 
+    if(!req.session.cart){
+        return res.render('Shopping_Cart', {products: null});
+    }
+    let cart = new Cart(req.session.cart);
+res.render('Checkout',{products: cart.generateArray(), totalPrice: cart.totalCost, Quantity: cart.totalQty, Months: months, Years: years})
 });
 
 

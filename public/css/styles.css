@@ -44,6 +44,13 @@ a {
 
 }
 
+th{
+    color:white;
+}
+
+td{
+    color:white;
+}
 
 .homepage{
     background-image: url("/public/images/Art/Art/1. PinkB, BlackC, WhiteOL.jpg");
@@ -390,3 +397,23 @@ padding-right: 100px
     opacity: 1;
 }
 
+.checkout{ 
+    color: white;
+}
+
+.text-light{ 
+    padding: 0;
+    margin:0;
+}
+
+.cart-img{ 
+    position: relative;
+    width: 100px;
+    height: 100px;
+
+}
+  @media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+    }
+  }
