@@ -306,21 +306,33 @@ app.get("/submit", function(req,res){
     }
 })
 
+//Function made to add the user's items to a shopping cart 
+//Passes in the oldCart value to always check what was in it previously
 function Cart(oldCart) { 
+
+//Get the products, Quantity & totalCost from the oldCart OR if there is no OLD cart set the cart to blank
     this.products = oldCart.products || {};
     this.totalQty = oldCart.totalQty || 0;
     this.totalCost = oldCart.totalCost || 0;
 
+//Create the function that adds items to the Cart Object
+// Given the parameters, product and id
     this.add = function(product, id){
+	//sets the varable storedProduct to the id of the selected product to be added to the basket
         let storedProduct = this.products[id];
-        if(!storedProduct) {
+        // If the id of the product can't be found set the values as below, by adding the product id and name to the products array
+		if(!storedProduct) {
             storedProduct = this.products[id] = {product: product, qty: 0, price: 0}
         }
+		// when the id is found when the function is called, increment the quantity of the individual product
         storedProduct.qty++;
+		//Calculate the new price, by multiplying by the quantity
         storedProduct.price = storedProduct.product.price * storedProduct.qty;
-        this.totalQty++;
+        //Increment the baskets total Quantity and totalPrice as per above
+		this.totalQty++;
         this.totalCost += storedProduct.product.price;
 }
+	//To the arr of all the ids of the products in the basket add the new product_id to recalculate in future
     this.generateArray = function(){
         const arr = [];
         for (var id in this.products){ 
@@ -330,29 +342,40 @@ function Cart(oldCart) {
     }
 };
 
+//Get route for the add to cart function
 app.get("/add-to-cart/:id", function (req,res, next){
-const productId = req.params.id; 
+//get the id from the URL
+const productId = req.params.id;
+//Use the ? notation to check whether or not there is a session in place or not, if  not set the cart to blank 
 const cart = new Cart(req.session.cart ? req.session.cart : {});
 
+// Use mongoose to find by ID using the URL productId
 Item.findById(productId, function(err, item){
-    if (err){
+    //Check for errors
+	if (err){
         return res.redirect('/Store');
     }
+	// add the item to the cart, using its id
     cart.add(item, item.id);
     req.session.cart = cart;
     console.log(req.session.cart);
+	// Once added redirect back to the store
      res.redirect('/Store')
 });
 });
 
+//GET the shopping cart route
 app.get('/Shopping_Cart', function(req, res ,next){
+// if there is a blank cart pass in a blank cart
 if(!req.session.cart){
     return res.render('Shopping_Cart', {products: null});
 }
+// if it is populated, render the cart to the page
 let cart = new Cart(req.session.cart);
 res.render('Shopping_Cart', {products: cart.generateArray(), totalPrice: cart.totalCost})
 });
 
+//GET the checkout route, display items if there are any in the cart. If not don't.
 app.get('/Checkout', function(req, res, next){ 
     if(!req.session.cart){
         return res.render('Shopping_Cart', {products: null});
@@ -360,6 +383,7 @@ app.get('/Checkout', function(req, res, next){
     let cart = new Cart(req.session.cart);
 res.render('Checkout',{products: cart.generateArray(), totalPrice: cart.totalCost, Quantity: cart.totalQty, Months: months, Years: years})
 });
+
 
 
 const port = process.env.PORT || 5000;
