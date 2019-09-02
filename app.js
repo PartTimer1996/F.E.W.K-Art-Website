@@ -128,7 +128,7 @@ const User = mongoose.model('User', userSchema);
 //      forename: "Ryan",
 //      surname: "Duffy",
 //      username: "rduffy16@qub.ac.uk",
-//     password: "Edenhazard69"
+//     password: "*********"
 
 //  });
 
